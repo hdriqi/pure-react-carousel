@@ -242,6 +242,7 @@ A Slider is a viewport that masks slides.  The Slider component must wrap one or
 | style | object | {} | No | Optional css styles to add to the Slider.  Note: internal css properties take precedence over any styles specified in the styles object |
 | trayProps | object | {} | No | Any props you want to attach to the slider tray with the exception of className and style. The className prop is handled via classNameTray prop above.  Style is used internally. Any event handlers like onMouseDown or others are called after any of our internal event handlers. |
 | trayTag | string | 'ul' | No | The HTML tag to used for the tray (the thing that holds all the slides and moves the slides back and forth.) |
+| ignoreCrossMove | boolean | false | No | Carousel will ignore dragging if the drag was started from cross axis instead of main axis |
 
 #### The Slider component creates the following pseudo HTML by default.
 

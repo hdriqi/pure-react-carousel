@@ -56,6 +56,7 @@ const Slider = class Slider extends React.Component {
     trayTag: PropTypes.string,
     visibleSlides: PropTypes.number,
     isIntrinsicHeight: PropTypes.bool,
+    ignoreCrossMove: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -77,6 +78,7 @@ const Slider = class Slider extends React.Component {
     trayTag: 'ul',
     visibleSlides: 1,
     isIntrinsicHeight: false,
+    ignoreCrossMove: false,
   }
 
   static slideSizeInPx(orientation, sliderTrayWidth, sliderTrayHeight, totalSlides) {
@@ -217,6 +219,21 @@ const Slider = class Slider extends React.Component {
   }
 
   fakeOnDragMove(screenX, screenY) {
+    // check if ignore cross move true
+    if (this.props.ignoreCrossMove) {
+      const vertical = this.props.orientation === 'vertical';
+      const yAxis = Math.abs(screenY - this.state.startY);
+      const xAxis = Math.abs(screenX - this.state.startX);
+      const deltMain = vertical ? yAxis : xAxis;
+      const deltCross = vertical ? xAxis : yAxis;
+      const isMovingCross = deltCross > deltMain;
+
+      // disable drag if cross move detected
+      if (isMovingCross) {
+        return;
+      }
+    }
+
     this.moveTimer = window.requestAnimationFrame.call(window, () => {
       this.setState(state => ({
         deltaX: screenX - state.startX,
@@ -557,6 +574,7 @@ const Slider = class Slider extends React.Component {
       trayTag: TrayTag,
       visibleSlides,
       isIntrinsicHeight,
+      ignoreCrossMove,
       ...props
     } = this.props;
 

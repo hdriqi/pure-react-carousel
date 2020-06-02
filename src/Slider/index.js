@@ -26,4 +26,5 @@ export default WithStore(Slider, state => ({
   touchEnabled: state.touchEnabled,
   visibleSlides: state.visibleSlides,
   isIntrinsicHeight: state.isIntrinsicHeight,
+  ignoreCrossMove: state.ignoreCrossMove,
 }));
