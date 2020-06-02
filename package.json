@@ -33,6 +33,7 @@
     "build:es": "NODE_ENV=production rollup -c rollup.config.es.js",
     "postbuild": "node postbuild.js",
     "build:watch": "watch 'npm run build' src",
+    "prepare": "npm run build",
     "prepublishOnly": "npm run build",
     "semantic-release": "semantic-release",
     "deploy": "gh-pages -d dev",
